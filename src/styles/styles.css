@@ -1,0 +1,100 @@
+/*body{
+    background-color: rgb(37, 37, 37);
+}
+h2 {
+    color: white;
+}*/
+
+
+/*PRUEBA PARRAFOS*/
+
+
+/*///*/
+/*NAV*/
+
+
+.card-img-logo {
+    width: 150px;
+}
+
+.card-columns {
+      column-count: 6;
+} 
+.card-img{
+    border-radius: 5px;
+    box-shadow: 5px 5px rgb(37, 37, 37);
+    height: 150px;
+}
+
+/*LOGIN*/
+.auth__main {
+    align-items: center;
+    background-color: black;
+    display: flex;
+    justify-content: center;
+    margin: 0px;
+    height: 100vh;
+    width: 100vw;
+}
+
+.auth__box-container {
+    background-color: white;
+    box-shadow: 0px 3px darkblue;
+    border-radius: 2px;
+    padding: 2%;
+    width: 400px;
+}
+
+.auth__social-networks{
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    width: 100%;
+}
+/*//BOTÓN DE GOOGLE*/
+.google-btn {
+    cursor: pointer;
+    margin-top: 5px;
+    width: 100%;
+    height: 42px;
+    background-color: rgb(19, 99, 173);
+    border-radius: 2px;
+    box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.25);
+
+    transition: box-shadow .3s ease;
+}
+    .google-icon-wrapper {
+        position: absolute;
+        margin-top: 1px;
+        margin-left: 1px;
+        width: 40px;
+        height: 40px;
+        border-radius: 2px;
+        background-color: white;
+    }
+    .google-icon {
+        position: absolute;
+        margin-top: 11px;
+        margin-left: 11px;
+        width: 18px;
+        height: 18px;
+    }
+    .btn-text {
+        float: right;
+        margin: 11px 40px 0 0;
+        color: white;
+        font-size: 14px;
+        letter-spacing: 0.2px;
+    }
+    .google-btn :hover {
+        box-shadow: 0 0 6px rgb(0, 89, 255);
+    }
+    .google-btn :active {
+        background: rgb(152, 179, 197);
+    }
+
+/*////////////////////////////////////////*/
+
