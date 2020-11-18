@@ -1,9 +1,25 @@
-/*body{
-    background-color: rgb(37, 37, 37);
+
+
+body{
+    background-color: #181818;
+    font-family: circle, Helvetica, Arial, sans-serif !important;
 }
-h2 {
-    color: white;
-}*/
+
+h3 {
+    color: #f8f8f8;
+}
+
+/*INPUTS SEARCH*/
+
+
+input, textarea { 
+	font-family: FontAwesome, "Open Sans", Verdana, sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    text-decoration: inherit;
+}
+
+
 
 
 /*PRUEBA PARRAFOS*/
@@ -11,6 +27,12 @@ h2 {
 
 /*///*/
 /*NAV*/
+
+.navbar-gray {
+    background-color: #282828;
+}
+
+
 
 
 .card-img-logo {
@@ -22,8 +44,8 @@ h2 {
 } 
 .card-img{
     border-radius: 5px;
-    box-shadow: 5px 5px rgb(37, 37, 37);
     height: 150px;
+    
 }
 
 /*LOGIN*/
@@ -35,11 +57,11 @@ h2 {
     margin: 0px;
     height: 100vh;
     width: 100vw;
+    
 }
 
 .auth__box-container {
     background-color: white;
-    box-shadow: 0px 3px darkblue;
     border-radius: 2px;
     padding: 2%;
     width: 400px;

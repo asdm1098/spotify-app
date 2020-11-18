@@ -112,8 +112,8 @@ import { types } from "../types/types";
 
 const initState = {
     releases: [], 
-    active: null
-
+    next: null,
+    previous: null
 }
 
 
@@ -125,7 +125,9 @@ export const releasesReducer = ( state = initState, action ) => {
 
             return{
                 ...state,
-                releases: [...action.payload]
+                releases: [...action.payload.releases],
+                next: action.payload.next,
+                previous: action.payload.previous
             }
 
         }

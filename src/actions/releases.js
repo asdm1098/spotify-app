@@ -1,5 +1,7 @@
 import { loadReleases } from "../helpers/loadReleases"
+import { loadReleasesNext } from "../helpers/loadReleasesNext";
 import { types } from "../types/types"
+import { finishLoading, startLoading } from "./ui";
 
 
 
@@ -14,6 +16,31 @@ export const startLoadingReleases = ( token ) => {
         
         console.log( releases );
         dispatch( setReleases( releases ) );
+
+    }
+}
+
+export const startNextPage = ( token, next ) => {
+    return async ( dispatch ) => {
+        dispatch( startLoading() );
+        const releases = await loadReleasesNext( token, next );
+        
+        //console.log( releases );
+        dispatch( setReleases( releases ) );
+        dispatch( finishLoading() );
+    }
+}
+
+export const startPreviousPage = ( token, previous ) => {
+    return async ( dispatch ) => {
+        dispatch( startLoading() );
+
+        const releases = await loadReleasesNext( token, previous );
+        
+        //console.log( releases );
+        dispatch( setReleases( releases ) );
+        
+        dispatch( finishLoading() );
 
     }
 }

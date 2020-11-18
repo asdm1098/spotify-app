@@ -49,7 +49,7 @@ export const startScreen = () => {
         
         dispatch( startLoading() );
 
-        const {uid} = getState().auth;
+        //const {uid} = getState().auth;
        
             
         dispatch( activeSongs('songs', 'Songs') );
@@ -58,9 +58,9 @@ export const startScreen = () => {
         dispatch(finishLoading());
             
 
-        const newSearch = {
+        /*const newSearch = {
             title: '',
-        }
+        }*/
         
         //console.log(uid, newSearch);
         //const doct = await db.collection( `${uid}/journal/notes` ).add( newSearch );

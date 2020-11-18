@@ -21,10 +21,9 @@ export const LoginScreen = () => {
     }
   
 
-
     return (
             <>
-                <center><h3 className="mb-3">Ingresar</h3></center>
+                <center><h4 className="mb-3" >Ingresar</h4></center>
                 {
                     ( loading ) && 
                     <div className="alert alert-info">Loading...</div>

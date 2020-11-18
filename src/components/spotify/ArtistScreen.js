@@ -1,6 +1,6 @@
-import React, { useEffect, useMemo, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux';
-import { Redirect, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 import { getArtistById } from '../../selectors/getArtistById';
 
@@ -61,18 +61,19 @@ export const ArtistScreen = ({ history }) =>  {
 
             <div className="col-8 animate__animated animate__fadeIn">
                 <h3>{ name }</h3>
-                <ul className="list-group list-group-flush">
-                    <li className="list-group-item"><b> Name: </b> { name } </li>
-                    <li className="list-group-item"><b> Followers: </b> { followers } </li>
-                    <li className="list-group-item"><b> Popularity: </b> { popularity } </li>
-                    <li className="list-group-item"><b> Type: </b> { type } </li>
+                <ul className="list-group list-group-flush" style={{color: 'white'}} >
+                    <li className="list-group-item bg-transparent"><b> Name: </b> { name } </li>
+                    <li className="list-group-item bg-transparent"><b> Followers: </b> { followers } </li>
+                    <li className="list-group-item bg-transparent"><b> Popularity: </b> { popularity } </li>
+                    <li className="list-group-item bg-transparent"><b> Type: </b> { type } </li>
                 </ul>
 
                 <button 
-                    className="btn btn-outline-info"
+                    className="btn btn-outline-success mt-3"
                     onClick={ handleReturn }
+                    style={{border: 'none'}}
                 >
-                    Return
+                    <i className="fas fa-undo"></i>
                 </button>
             </div>
         </div>

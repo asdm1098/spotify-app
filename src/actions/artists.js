@@ -38,9 +38,9 @@ export const startScreenArtists = () => {
         dispatch( startLoading() );
         //const {uid} = getState().auth;
 
-        const newSearch = {
+       /* const newSearch = {
             title: '',
-        }
+        }*/
 
         dispatch( activeArtists('artists', 'Artists') );
         console.log( 'carga correcta');

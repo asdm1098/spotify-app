@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useLocation } from 'react-router-dom';
+
 import queryString from 'query-string';
 
 import { startLoadingArtists, startScreenArtists, startSearchArtist } from '../../actions/artists';
 import { startLogout } from '../../actions/auth';
 import { activeReleases } from '../../actions/releases';
 import { /*activeSongs,*/ startLoadingSongs, startScreen, startSearchSong } from '../../actions/songs';
-import { searchSongs } from '../../helpers/searchSongs';
+//import { searchSongs } from '../../helpers/searchSongs';
 import { useForm } from '../../hooks/useForm';
 import  logo  from '../../styles/images/Spotify.png';
 
@@ -127,10 +128,10 @@ export const Navbar = () => {
         history.replace('/');
         dispatch( activeReleases('releases', 'New releases'));
     }
-
+    
     return (
 
-        <div className="navbar navbar-dark bg-dark">
+        <div className="navbar navbar-dark navbar-gray">
             <nav className="navbar">
                 <a  className="navbar-brand"
                     onClick={ handleHome }
@@ -141,46 +142,53 @@ export const Navbar = () => {
             </nav>
 
             <form onSubmit={ handleSearchArtist } className="form-inline my-2 my-lg-0" >
+            {/*<i className="fas fa-search"></i>*/}
+                
                 <input 
                     type="text"
-                    placeholder="Find artist"
-                    className="form-control"
+                    className="form-control fas"
+                    placeholder= "&#xf002; Find artist"
                     name="searchArtist"
                     autoComplete="off"
                     disabled={loading}
                     value= { searchArtist }
                     onClick= {handleClickArtists}
                     onChange= { handleInputChange }
+                    style={{background: '#333333', border: 'none', color: 'gray',
+                            width: '20vw'
+                    }}
                     
                 />
             </form>
-            {
-                ( loading ) && 
-                 <div className="alert alert-info">Loading...</div>
-            }
+           
             <form onSubmit={ handleSearchSong } className="form-inline my-2 my-lg-0" >
+                
                 <input 
                     type="text"
-                    placeholder="Find song"
-                    className="form-control"
+                    placeholder="&#xf002; Find song"
+                    className="form-control fas"
                     name= "searchSong"
                     autoComplete= "off"
                     disabled = { loading }
                     value={ searchSong }
                     onClick = { handleClickSongs }
                     onChange = { handleInputChange }
+                    style={{background: '#333333', border: 'none', color: 'gray',
+                    width: '20vw',
+                    }}
                 />
+                
             </form>
-
+            
             <span style={{ color: "white"}}>{ name }</span>         
             <button 
-                className="btn btn-success"
+                className="btn btn-outline-success"
                 onClick = { handleLogout }
             >
                 <i className="fas fa-sign-out-alt"></i>
-                <span> Salir</span>
+                <span> Logout </span>
             </button>
-
+            
         </div>
         
     )

@@ -19,11 +19,11 @@ export const SongsList = () => {
                     &&
                 songs.map( (song, index) => (  
                 
-                <div className="card ms-3 animate__animated animate__fadeIn" key={ index }>
-                    <img src={ song.imgAlbum } className="card-img" alt={ song.name } />
-                    <div className="card-body">
-                        <h5 className="card-title text-truncate">{ song.name }</h5>
-                        <p className="card-text text-truncate" > { song.nameArtist }</p>
+                <div className="card ms-3 bg-transparent animate__animated animate__fadeIn" key={ index }>
+                    <img src={ song.imgAlbum } className="card-img mb-2" alt={ song.name } />
+                    <div className="card-body" style={{padding:'0'}}>
+                        <h5 className="card-title text-truncate mb-0"style={{color: 'white'}} >{ song.name }</h5>
+                        <p className="card-text text-truncate" style={{color: 'gray'}} > { song.nameArtist }</p>
                     </div>
                 </div>
 

@@ -1,11 +1,11 @@
 import axios from 'axios';
 
 
-export const loadReleases = async ( token ) => {
+export const loadReleasesNext = async ( token, api ) => {
     
     
 
-    const {data} = await axios('https://api.spotify.com/v1/browse/new-releases?country=CO&offset=0&limit=12', {
+    const {data} = await axios(`${api}`, {
 
         method: 'GET',
         headers: { 'Authorization' : 'Bearer ' + token },
@@ -51,4 +51,3 @@ export const loadReleases = async ( token ) => {
         releases, next, previous
     };
 }
-
