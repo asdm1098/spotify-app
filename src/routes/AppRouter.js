@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from 'react';
-//import axios from 'axios';
-//import Swal from 'sweetalert2';
 
 import { useDispatch } from 'react-redux';
 import {
@@ -9,40 +7,41 @@ import {
   Redirect
 } from "react-router-dom";
 
-//import { login, startSpotifyLogin } from '../actions/auth';
-//import { firebase } from '../firebase/firebase-config';
 import { AuthRouter } from './AuthRouter';
 import { DashboardRoutes } from './DashboardRoutes';
 import { PrivateRoute } from './PrivateRoute';
 import { PublicRoute } from './PublicRoute';
-import { loginSpotify } from '../actions/auth';
+import { loginSpotify, startSpotifyLogin } from '../actions/auth';
 
 export const AppRouter = () => {
     
     const dispatch = useDispatch();
 
+    
+
     const [ cheking, setCheking ] = useState(true);
     const [ isLoggedIn, setIsLoggedIn ] = useState(false);
-        
-    const token = localStorage.getItem('token');
-    
-    useEffect( () => {
-        console.log( token );
+
+
+    useEffect(() => {
+        const token = localStorage.getItem('token');
+       
         if(  token != null ) {
             console.log('SI HAY TOKEN ');
-
+    
             dispatch( loginSpotify(token));
             setIsLoggedIn( true )
         }else {
             console.log('NO HAY TOKEN ! ');
+            dispatch(startSpotifyLogin());
             setIsLoggedIn( false );
         }
-
-        setCheking( false );
-
-        
     
-    }, [token, dispatch]);
+        setCheking( false );
+        console.log('::TOKEN:: ', token);
+    }, [dispatch])
+    
+
 
 
     if ( cheking ) {
@@ -54,8 +53,8 @@ export const AppRouter = () => {
    
 
     return (
-        <Router>
-            <div>
+        <Router>    
+            <div>           
                 <Switch>
                     <PublicRoute path="/auth" isAuthenticated = { isLoggedIn } component= { AuthRouter } /> 
                     

@@ -1,7 +1,9 @@
 
 import { loadArtists } from "../helpers/loadArtists";
 import { searchArtists } from "../helpers/searchArtists";
+import { albumsOptions, getArtistById, relatedOptions, topTracksOptions } from "../selectors/getArtistById";
 import { types } from "../types/types";
+import { startLogout } from "./auth";
 import { finishLoading, startLoading } from "./ui";
 
 
@@ -9,21 +11,38 @@ import { finishLoading, startLoading } from "./ui";
 export const startLoadingArtists = ( token ) => {
     return async ( dispatch ) => {
         
-        const artists = await loadArtists( token );
+        try {
+            dispatch( activeArtists('artists', 'Artists') );
+            const artists = await loadArtists( token );
+            //console.log( artists );
+            dispatch( setArtists( artists ));
+            dispatch( activeArtists('artists', 'Artists') );
+            //console.log(artists);
+            dispatch( finishLoading() );
+        } catch (error) {
+            console.log(error);
+            dispatch( startLogout());
+        }
         
-        console.log( artists );
-        dispatch( setArtists( artists ));
+        
     }
 }
 
 export const startSearchArtist = ( token, search ) => {
     return async ( dispatch ) => {
-        dispatch( startLoading() );
-        
-        const artists = await searchArtists( token, search );
-        //console.log('RESULTADO DE LA BUSQUEDA:' , artists);
-        dispatch( setArtists( artists ));
-        dispatch( finishLoading() );
+
+        try {
+            dispatch( startLoading() );
+            
+            const artists = await searchArtists( token, search );
+            //console.log('RESULTADO DE LA BUSQUEDA:' , artists);
+            dispatch( setArtists( artists ));
+            dispatch( finishLoading() );
+            
+        } catch (error) {
+            console.log(error);
+            dispatch( startLogout());
+        }
     }
 }
 
@@ -33,24 +52,6 @@ export const setArtists = ( artists ) => ({
 })
 
 
-export const startScreenArtists = () => {
-    return (dispatch) => {
-        dispatch( startLoading() );
-        //const {uid} = getState().auth;
-
-       /* const newSearch = {
-            title: '',
-        }*/
-
-        dispatch( activeArtists('artists', 'Artists') );
-        console.log( 'carga correcta');
-        dispatch( finishLoading() );
-
-        //console.log(uid, newSearch);
-        //window.location.href = '/artists';
-    }
-}
-
 export const activeArtists = (screen, title ) => ({
     type: types.ArtistsScreenActive,
     payload: {
@@ -58,3 +59,70 @@ export const activeArtists = (screen, title ) => ({
         title
     }
 });
+
+
+//ARTISTA ACTIVO
+export const startActiveArtist = ( artistId, token ) => {
+    return async ( dispatch ) => {
+        try {
+            
+            dispatch( startLoading() );
+            const activeArtist = await getArtistById( artistId, token)
+            dispatch( setActiveArtist(activeArtist[0]))
+            dispatch(activeArtists('ActiveArtist', 'ActiveArtist'))
+    
+            dispatch( finishLoading() );
+    
+            //console.log(activeArtist[0]);
+        } catch (error) {
+            console.log(error);
+            dispatch( startLogout());
+        }
+    }
+}
+
+const setActiveArtist = ( activeArtist ) => ({
+    type: types.activeArtist,
+    payload: activeArtist
+})
+
+
+
+//ARTISTAS RELACIONADOS
+export const startRelatedArtists = ( artistId, token ) => {
+    return async ( dispatch ) => {
+        const relatedArtists = await relatedOptions( artistId, token)
+        dispatch( setRelatedArtists(relatedArtists))
+    }
+}
+
+const setRelatedArtists = ( relatedArtists ) => ({
+    type: types.relatedArtists,
+    payload: relatedArtists
+})
+
+///ALBUMS ARTISTA
+export const startAlbumsArtist = ( artistId, token ) => {
+    return async ( dispatch ) => {
+        const albums = await albumsOptions( artistId, token)
+        dispatch( setAlbums(albums))
+    }
+}
+
+const setAlbums = ( albums ) => ({
+    type: types.albums,
+    payload: albums
+})
+
+//TOP TRACKS ARTISTA
+export const startTopTracks = ( artistId, token ) => {
+    return async ( dispatch ) => {
+        const topTracks = await topTracksOptions( artistId, token);
+        dispatch( setTracks(topTracks));
+    }
+}
+
+const setTracks = ( tracks ) => ({
+    type: types.topTracks,
+    payload: tracks
+})

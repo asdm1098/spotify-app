@@ -41,38 +41,36 @@ export const ReleasesScreen = () => {
 
     return (
         <div>
-            <div className="container mt-3">
+            <div className="container mt-2">
             <center><h3>{ title }</h3></center>
 
-                <div className="container mt-4">
-                    <div className="mb-2">
-                        <button 
-                            className = "btn" 
-                            style={{background: 'none', border:'none', cursor: 'pointer'}} 
-                            disabled = { loading || !previous } 
-                            onClick={previousPage} 
-                        >
-                            <i  
-                                className="fas fa-chevron-circle-left" 
-                                style={{fontSize: '29px', color: 'gray'}}
-                            ></i>
-                        </button>
+            <div className="mb-2" style={{textAlign: 'right'}}>
+                <button 
+                    className = "btn" 
+                    style={{background: 'none', border:'none', cursor: 'pointer'}} 
+                    disabled = { loading || !previous } 
+                    onClick={previousPage} 
+                >
+                    <i  
+                        className="fas fa-chevron-circle-left" 
+                        style={{fontSize: '29px', color: 'gray'}}
+                    ></i>
+                </button>
 
-                        <button 
-                            className = "btn" 
-                            style={{background: 'none', border:'none', cursor: 'pointer'}}  
-                            disabled= {loading || !next} 
-                            onClick={nextPage}
-                        >
-                            <i  
-                                className="fas fa-chevron-circle-right"
-                                style={{fontSize: '29px', color: 'gray', cursor: 'pointer'}}
-                            ></i>
-                        </button>
-                    </div>
-                    <ReleasesList  />
-                </div>
-                
+                <button 
+                    className = "btn" 
+                    style={{background: 'none', border:'none', cursor: 'pointer'}}  
+                    disabled= {loading || !next} 
+                    onClick={nextPage}
+                >
+                    <i  
+                        className="fas fa-chevron-circle-right"
+                        style={{fontSize: '29px', color: 'gray', cursor: 'pointer'}}
+                    ></i>
+                </button>
+            </div>
+            <ReleasesList  />
+              
             </div>
         </div>
     )

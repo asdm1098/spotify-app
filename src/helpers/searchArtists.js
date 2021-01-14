@@ -5,7 +5,7 @@ export const searchArtists = async ( token, search ) => {
     
     
 
-    const {data} = await axios(`https://api.spotify.com/v1/search?q=${search}&type=artist&market=CO&limit=6&offset=5`, {
+    const {data} = await axios(`https://api.spotify.com/v1/search?q=${search}&type=artist&limit=6&offset=5`, {
        
         method: 'GET',
         headers: { 'Authorization' : 'Bearer ' + token },
@@ -37,7 +37,7 @@ export const searchArtists = async ( token, search ) => {
             
             idArtist: artist.id,
             name: artist.name,
-            imgArtist: artist.images[1]?.url,
+            imgArtist: artist.images[2]?.url,
             hrefArtist: artist.href,
             followers: artist.followers.total,
             popularity: artist.popularity,

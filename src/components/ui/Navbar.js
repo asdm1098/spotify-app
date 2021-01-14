@@ -1,12 +1,11 @@
-import React, { useState } from 'react';
+import React, { /*useState*/ } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory, useLocation } from 'react-router-dom';
+import {  useHistory, useLocation } from 'react-router-dom';
 
 import queryString from 'query-string';
 
-import { startLoadingArtists, startScreenArtists, startSearchArtist } from '../../actions/artists';
-import { startLogout } from '../../actions/auth';
-import { activeReleases } from '../../actions/releases';
+import { startLoadingArtists, startSearchArtist } from '../../actions/artists';
+//import { startLogout } from '../../actions/auth';
 import { /*activeSongs,*/ startLoadingSongs, startScreen, startSearchSong } from '../../actions/songs';
 //import { searchSongs } from '../../helpers/searchSongs';
 import { useForm } from '../../hooks/useForm';
@@ -16,11 +15,12 @@ export const Navbar = () => {
     
     const history = useHistory();
     const location = useLocation();
+    const dispatch = useDispatch();
     //console.log(location);
     
     const { q = '' } = queryString.parse( location.search );
+    const { q2 = '' } = queryString.parse( location.search );
     //console.log(q);
-    const dispatch = useDispatch();
 
     const {name, token } = useSelector(state => state.auth);
     const { loading } = useSelector( state => state.ui);
@@ -28,113 +28,69 @@ export const Navbar = () => {
 
      const [ formValues, handleInputChange ] = useForm( {
         searchArtist: q,
-        searchSong: '',
+        searchSong: q2,
     } );
 
     const { searchArtist, searchSong } = formValues;
-    const [search, setSearch] = useState(searchArtist);
-    const [search2, setSearch2] = useState(searchSong);
     
     const handleClickArtists = () => {
-        if ( screen !== 'artists' ){
+        if ( screen !== 'artists' && screen !== 'ActiveArtist' ){
             
             console.log('PRIMERA CARGA ARTISTAS CORRECTAMENTE');
-
-            dispatch( startScreenArtists() );
             dispatch( startLoadingArtists( token ));
             history.push('/artists');
-            //history.push(` ?q=${ searchArtist }`)
         }
     }
- 
-    
-
+     
     const handleSearchArtist = async(e) => {
-        await history.push(`?q=${ searchArtist }`);
         e.preventDefault();
         
-       // console.log('SEARCH ARTIST:', searchArtist);
-       // console.log('SEARCH: ', search);
-
-       setSearch( searchArtist );
-       
-       
-
-       if( search !== searchArtist && searchArtist !== '' ) {
-           
-            
-           dispatch( startSearchArtist( token, searchArtist) );
-           dispatch( startScreenArtists() );
-
-            
-            
-            setSearch( searchArtist )
-           
-
-            console.log( searchArtist );
-
-        } else { console.log('Repitiendo busqueda');}
-
-        if( searchArtist === '' && search !== '' ){
-            dispatch( startScreenArtists() );
-            console.log('AL INICIO DEL SCREEN');
+        if( screen === 'ActiveArtist' ) {
+            await history.replace(`/artists`);
         }
-
-        
+        if( searchArtist.trim().length > 2 ){
+            await history.push(`?q=${ searchArtist }`);
+            dispatch( startSearchArtist( token, searchArtist) );
+            console.log('BUSQUEDA ARTISTA');
+        }
     }
-
 
     const handleClickSongs = () => {
         if ( screen !== 'songs' && screen !== 'searchSong' ){
             
             console.log('PRIMERA CARGA CANCIONES');
-            history.push('/songs');
             dispatch( startScreen() );
             dispatch( startLoadingSongs( token ));
-            //history.push(` ?q=${ searchArtist }`)
+            history.push('/songs');
+
         }
     }
 
-    const handleSearchSong = (e) => {
+    const handleSearchSong = async(e) => {
         e.preventDefault();
-        //history.push(`?q=${ searchSong }`)
-      
-        setSearch2( searchSong );
+        await history.push(`?q2=${ searchSong }`)
 
-        if( search2 !== searchSong && searchSong !== '' ) {
-
+        if( searchSong.trim().length > 2 ){
             dispatch( startSearchSong( token, searchSong) );
-            
-            //dispatch( startScreen() );
-            
-            //history.push(` ?q=${ searchArtist }`)
-            setSearch( searchSong )
-            console.log( 'BUSQUEDA CANCIÓN:', searchSong );
-
-        } else { console.log('Repitiendo busqueda CANCIÓN');}
-
-        if( searchSong === '' && search2 !== '' ){
+            console.log('BUSQUEDA CANCIÓN');
+        }else {
             dispatch( startScreen() );
             console.log('AL INICIO DEL SCREEN SONG');
         }
     }
 
-    const handleLogout = () => {
-        history.replace('/login');
+    /*const handleLogout = () => {
         dispatch( startLogout() );
-    }
+    }*/
 
-    const handleHome = () => {
-        history.replace('/');
-        dispatch( activeReleases('releases', 'New releases'));
-    }
+    
     
     return (
 
         <div className="navbar navbar-dark navbar-gray">
-            <nav className="navbar">
+            <nav className="navbar-content row">
                 <a  className="navbar-brand"
-                    onClick={ handleHome }
+                    href= "/"
                     style= {{ cursor: "pointer"}}
                 >
                     <img src={logo} className="d-inline-block align-top card-img-logo" alt="home"/>
@@ -181,15 +137,16 @@ export const Navbar = () => {
             </form>
             
             <span style={{ color: "white"}}>{ name }</span>         
-            <button 
-                className="btn btn-outline-success"
-                onClick = { handleLogout }
-            >
-                <i className="fas fa-sign-out-alt"></i>
-                <span> Logout </span>
-            </button>
+            {/*<button 
+                    className="btn btn-outline-success"
+                    onClick = { handleLogout }
+                >
+                    <i className="fas fa-sign-out-alt"></i>
+            </button>*/}
             
         </div>
+
+        
         
     )
 }

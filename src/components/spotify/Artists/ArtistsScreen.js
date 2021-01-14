@@ -8,18 +8,15 @@ import { ArtistList } from './ArtistList';
 
 export const ArtistsScreen = () => {
     const dispatch = useDispatch();
-    
     const {token} = useSelector(state => state.auth)
-    const { title } = useSelector(state => state.spotify);
 
     useEffect(() => {
         
         if( token !=null ){
-
-            //console.log('ESTA ES LA PUTA RESPUESTA CORRECTA');
+            //console.log('ESTA ES LA RESPUESTA CORRECTA');
             dispatch(startLoadingArtists(token) );
         }else{
-            console.log('ERROR !');
+            console.log('error !');
         }
 
     }, [token, dispatch])
@@ -27,10 +24,10 @@ export const ArtistsScreen = () => {
 
     return (
         <div>
-            <div className="container mt-3">
-            <center><h3>{ title }</h3></center>
+            <div className="container mt-2">
+            <center><h3>Artists</h3></center>
 
-                <div className="container mt-5">
+                <div className="container mt-4">
                     <ArtistList />
                 </div>
 

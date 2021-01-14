@@ -7,13 +7,11 @@ import { SongsList } from './SongsList';
 export const SongsScreen = () => {
     const dispatch = useDispatch();
     const {token} = useSelector(state => state.auth)
-    const { title } = useSelector(state => state.spotify);
 
     useEffect(() => {
         
-        if( token !=null ){
-
-            //console.log('ESTA ES LA PUTA RESPUESTA CORRECTA');
+        if( token !== null ){
+            //console.log('ESTA ES LA RESPUESTA CORRECTA');
             dispatch(startLoadingSongs(token) );
         }else{
             console.log('ALVVVVVVVVVVVVGA');
@@ -24,9 +22,9 @@ export const SongsScreen = () => {
 
     return (
         <div>
-            <div className="container mt-3">
+            <div className="container mt-2">
 
-                <center><h3>{ title }</h3></center>      
+                <center><h3>Songs</h3></center>      
                 <div className="container mt-5">
                     <SongsList />
                 </div>

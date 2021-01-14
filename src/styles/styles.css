@@ -1,8 +1,11 @@
-
+* {
+    margin: 0;
+}
 
 body{
     background-color: #181818;
     font-family: circle, Helvetica, Arial, sans-serif !important;
+    overflow: hidden;
 }
 
 h3 {
@@ -20,8 +23,6 @@ input, textarea {
 }
 
 
-
-
 /*PRUEBA PARRAFOS*/
 
 
@@ -29,11 +30,12 @@ input, textarea {
 /*NAV*/
 
 .navbar-gray {
+    top: 0;
+    left: 0;
+    height: 70px;
+    width: 100%;
     background-color: #282828;
 }
-
-
-
 
 .card-img-logo {
     width: 150px;
@@ -76,47 +78,206 @@ input, textarea {
     padding-bottom: 20px;
     width: 100%;
 }
-/*//BOTÓN DE GOOGLE*/
-.google-btn {
-    cursor: pointer;
-    margin-top: 5px;
-    width: 100%;
-    height: 42px;
-    background-color: rgb(19, 99, 173);
-    border-radius: 2px;
-    box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.25);
 
-    transition: box-shadow .3s ease;
-}
-    .google-icon-wrapper {
-        position: absolute;
-        margin-top: 1px;
-        margin-left: 1px;
-        width: 40px;
-        height: 40px;
-        border-radius: 2px;
-        background-color: white;
-    }
-    .google-icon {
-        position: absolute;
-        margin-top: 11px;
-        margin-left: 11px;
-        width: 18px;
-        height: 18px;
-    }
-    .btn-text {
-        float: right;
-        margin: 11px 40px 0 0;
-        color: white;
-        font-size: 14px;
-        letter-spacing: 0.2px;
-    }
-    .google-btn :hover {
-        box-shadow: 0 0 6px rgb(0, 89, 255);
-    }
-    .google-btn :active {
-        background: rgb(152, 179, 197);
-    }
 
 /*////////////////////////////////////////*/
 
+/* Artist Profile */
+.new-releases {
+    height: 80vh ;
+    background-color: #181818;
+    grid-template-rows: 7% auto;
+}
+.artist-profile-content {
+    height: 90vh;
+    grid-template-areas: "about about albums albums albums albums";
+}
+.artist-about {
+    width: 40%;
+}
+.artist-about-photo {
+    height: 40vh;
+    align-items: center;
+    justify-content: center;
+}
+.artist-photo {
+    height: 160px;
+    width: 160px;
+    border-radius: 50%;
+    background-position: center;
+    background-size: cover;
+}
+.artist-profile-name {
+    margin: 10px;
+    font-size: 2em;
+    color: #f8f8f8;
+}
+.artist-about-info {
+    height: 30vh;
+}
+.artist-info {
+    margin: 25px 10% 0;
+    padding-top: 10px;
+    height: 20vh;
+    color: #f8f8f8;
+    overflow-y: auto;
+    border-bottom: solid 1px #f8f8f8;
+    border-top: solid 1px #f8f8f8;
+}
+.artist-info::before {
+    top: -5px;
+    position: relative;
+    content: "About";
+    color: #f8f8f8;
+}
+.artist-about-related-container {
+    margin: -10px 10% 0;
+}
+.artist-about-related-container p {
+    margin-bottom: 10px;
+    color: #f8f8f8;
+}
+.artist-about-related {
+    overflow: hidden;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+}
+.related-photo {
+    position: relative;
+    border-radius: 50%;
+    background-position: center;
+    background-size: cover;
+    width: 75px;
+    height: 75px;
+    transition: all 300ms ease-in-out;
+}
+.related-photo:hover {
+    margin: 0 3px;
+}
+.artist-profile-music {
+    width: 60%;
+}
+.artist-profile-music-albums {
+    border-bottom: solid 1px #f8f8f8;
+    margin: 20px 5% 0 0;
+}
+.artist-profile-music-albums .fas {
+    font-size: 20px;
+}
+.album-cart-container {
+    height: 180px;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    overflow: hidden;
+}
+.album-cart {
+    width: 110px;
+    height: 150px;
+    transition: all 300ms ease-in-out;
+    cursor: pointer;
+}
+.album-cart:hover {
+    margin: 0 3px;
+}
+.album-cart:hover .album-title {
+    color: #f8f8f8;
+}
+.album-image {
+    border-radius: 3px;
+    background-position: center;
+    background-size: cover;
+    height: 120px;
+    width: 100%;
+}
+.album-title {
+    margin: 3px 0 0 2px;
+    font-size: 0.9em;
+    color: #f8f8f8;
+    height: 22px;
+    overflow: hidden;
+}
+.album-year {
+    margin: -3px 0 0 2px;
+    font-size: 0.7em;
+    color: #f8f8f8;
+}
+.albums-control {
+    justify-content: space-between;
+}
+.albums-control p {
+    color: #f8f8f8;
+}
+/* Top Tracks */
+.artist-profile-music-tracks {
+    margin-top: 8vh;
+    margin-right: 5%;
+    height: 40vh;
+    border-top: #f8f8f8;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+.artist-profile-music-tracks-container::before {
+    top: 15px;
+    position: relative;
+    content: "Most Popular Tracks";
+    color: #f8f8f8;
+}
+.top-cart {
+    width: 100%;
+    border-bottom: solid 1px #f8f8f8;
+    align-items: center;
+    padding: 10px 0;
+}
+.top-image {
+    height: 40px;
+    width: 40px;
+    background-position: center;
+    background-size: cover;
+    border-radius: 5px;
+    margin-right: 15px;
+    cursor: pointer;
+}
+.top-cart:hover .top-image{
+    height: 42px;
+    width: 42px;
+}
+.top-position {
+    width: 10px;
+    padding-left: 40px;
+    padding-right: 20px;
+    color: #f8f8f8;
+    font-size: 0.8em;
+}
+.top-title {
+    color: #f8f8f8;
+    cursor: pointer;
+}
+.top-title:hover {
+    color: #f8f8f8;
+}
+.top-album {
+    color: #f8f8f8;
+    font-size: 0.8em;
+    cursor: pointer;
+}
+.top-song-info {
+    width: 80%;
+}
+.top-duration {
+    color: #f8f8f8;
+    font-size: 0.8em;
+    justify-content: flex-end;
+}
+/* Display */
+.row {
+    display: flex;
+}
+.column {
+    display: flex;
+    flex-direction: column;
+}
+.grid {
+    display: grid;
+}

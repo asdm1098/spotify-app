@@ -1,6 +1,7 @@
 import { loadReleases } from "../helpers/loadReleases"
 import { loadReleasesNext } from "../helpers/loadReleasesNext";
 import { types } from "../types/types"
+import { startLogout } from "./auth";
 import { finishLoading, startLoading } from "./ui";
 
 
@@ -12,35 +13,54 @@ import { finishLoading, startLoading } from "./ui";
 export const startLoadingReleases = ( token ) => {
     return async ( dispatch ) => {
         
-        const releases = await loadReleases( token );
+        try {
+            const releases = await loadReleases( token );
+            //console.log( releases );
+            dispatch( setReleases( releases ) );
+        } catch (error) {
+            console.log('error');
+            dispatch( startLogout());
+        }
         
-        console.log( releases );
-        dispatch( setReleases( releases ) );
 
     }
 }
 
 export const startNextPage = ( token, next ) => {
     return async ( dispatch ) => {
-        dispatch( startLoading() );
-        const releases = await loadReleasesNext( token, next );
-        
-        //console.log( releases );
-        dispatch( setReleases( releases ) );
-        dispatch( finishLoading() );
+
+        try {
+            dispatch( startLoading() );
+            const releases = await loadReleasesNext( token, next );
+            
+            //console.log( releases );
+            dispatch( setReleases( releases ) );
+            dispatch( finishLoading() );
+        } catch (error) {
+            console.log(error);
+            dispatch( startLogout());
+        }
+
     }
 }
 
 export const startPreviousPage = ( token, previous ) => {
     return async ( dispatch ) => {
-        dispatch( startLoading() );
+        
+        try {
+            dispatch( startLoading() );
+    
+            const releases = await loadReleasesNext( token, previous );
+            
+            //console.log( releases );
+            dispatch( setReleases( releases ) );
+            
+            dispatch( finishLoading() );
+        } catch (error) {
+            console.log(error);
+            dispatch( startLogout());
+        }
 
-        const releases = await loadReleasesNext( token, previous );
-        
-        //console.log( releases );
-        dispatch( setReleases( releases ) );
-        
-        dispatch( finishLoading() );
 
     }
 }

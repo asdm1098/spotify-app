@@ -4,7 +4,6 @@ import axios from 'axios';
 export const loadReleases = async ( token ) => {
     
     
-
     const {data} = await axios('https://api.spotify.com/v1/browse/new-releases?country=CO&offset=0&limit=12', {
 
         method: 'GET',

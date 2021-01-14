@@ -2,31 +2,35 @@
 import { loadSongs } from "../helpers/loadSongs";
 import { searchSongs } from "../helpers/searchSongs";
 import { types } from "../types/types";
+import { startLogout } from "./auth";
 import { finishLoading, startLoading } from "./ui";
 
 
 export const startLoadingSongs = ( token ) => {
     return async ( dispatch ) => {
         
-        const songs = await loadSongs( token );
-        
-        console.log( songs );
-        dispatch( setSongs( songs ));
+        try {
+            const songs = await loadSongs( token );
+            //console.log( songs );
+            dispatch( setSongs( songs ));
+        } catch (error) {
+            console.log(error);
+            dispatch( startLogout());
+        }
     }
 }
 
 export const startSearchSong = ( token, search ) => {
     return async ( dispatch ) => {
         dispatch( startLoading() );
-        
 
         try {
             
             const songs = await searchSongs( token, search );
-            console.log('RESULTADO DE LA BUSQUEDA:' , songs);
+            //console.log('RESULTADO DE LA BUSQUEDA:' , songs);
             dispatch( activeSongs('searchSong', 'Songs found') );
             dispatch( setSongs( songs ));
-    
+            //console.log(songs);
     
             dispatch( finishLoading() );
 
@@ -48,23 +52,12 @@ export const startScreen = () => {
     return (dispatch, getState) => {
         
         dispatch( startLoading() );
-
-        //const {uid} = getState().auth;
-       
             
         dispatch( activeSongs('songs', 'Songs') );
         console.log('carga correcta');
 
         dispatch(finishLoading());
-            
 
-        /*const newSearch = {
-            title: '',
-        }*/
-        
-        //console.log(uid, newSearch);
-        //const doct = await db.collection( `${uid}/journal/notes` ).add( newSearch );
-        //window.location.href = '/songs';
     }
 }
 

@@ -10,7 +10,6 @@ export const types = {
     releasesLoad: '[releases] Load Releases',
     releasesScreenActive: '[releases] Screen Active',
     
-
     uiSetError: '[UI] Set Error',
     uiRemoveError: '[UI] Remove Error',
     uiStartLoading: '[UI] Start loading',
@@ -19,14 +18,15 @@ export const types = {
     songsStartScreen: '[Songs] Start Screen',
     songsScreenActive: '[Songs] Set active screen', //envio al store la pantalla activa y url
     songsLoad: '[Songs] Load Songs', 
-    songsUpdate: '[Songs] Update Songs',
-    songsLogoutCleaning: '[Songs] Logout Cleaning',
 
     ArtistsStartScreen: '[Artists] Start Screen',
     ArtistsScreenActive: '[Artists] Set active screen', //envio al store la pantalla activa y url
     ArtistsLoad: '[Artists] Load Artists', 
-    ArtistsUpdate: '[Artists] Update Artists',
-    ArtistsLogoutCleaning: '[Artists] Logout Cleaning',
+
+    activeArtist: '[Artists] artist Active',
+    relatedArtists: '[Artists] related Artists',
+    albums: '[Artists] albums Artist',
+    topTracks: '[Artists] topTracks Artist',
 
 
 

@@ -4,8 +4,6 @@ import { types } from "../types/types";
 const initialState = {
     screen: 'releases',
     title: 'New releases',
-    data: [],
-    active: null
 }
 
 

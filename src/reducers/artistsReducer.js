@@ -2,8 +2,11 @@
 import { types } from "../types/types";
 
 const initState = {
-    artists: [], 
-    active: null
+    artists: [],
+    artist: [],
+    relatedArtists: [],
+    albums: [],
+    topTracks: [],
 
 }
 
@@ -19,6 +22,33 @@ export const artistsReducer = ( state = initState, action ) => {
                 artists: [...action.payload]
             }
 
+        }
+        case types.activeArtist: {
+            return {
+                ...state,
+                artist: {...action.payload}
+            }
+        }
+
+        case types.relatedArtists: {
+            return {
+                ...state,
+                relatedArtists: [ ...action.payload ]
+            }
+        }
+
+        case types.albums: {
+            return {
+                ...state,
+                albums: [ ...action.payload ]
+            }
+        }
+
+        case types.topTracks: {
+            return {
+                ...state,
+                topTracks: [ ...action.payload ]
+            }
         }
     
         default:

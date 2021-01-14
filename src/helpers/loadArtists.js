@@ -34,7 +34,7 @@ export const loadArtists = async ( token ) => {
             
             idArtist: artist.id,
             name: artist.name,
-            imgArtist: artist.images[1].url,
+            imgArtist: artist.images[2]?.url,
             hrefArtist: artist.href,
             followers: artist.followers.total
 

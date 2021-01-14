@@ -48,6 +48,7 @@ export const loginSpotify = ( token ) => ({
     }
 });
 
+//En caso de necesitarse LOGIN Y LOGOUT.
 
 export const login = ( uid, displayName ) => ({
         type: types.login,
@@ -59,8 +60,6 @@ export const login = ( uid, displayName ) => ({
 
 export const startLogout = () => {
     return async( dispatch ) => {
-
-
         localStorage.removeItem('token');
         dispatch( logout() );
         window.location.href = '/';
