@@ -62,22 +62,7 @@ input, textarea {
     
 }
 
-.auth__box-container {
-    background-color: white;
-    border-radius: 2px;
-    padding: 2%;
-    width: 400px;
-}
 
-.auth__social-networks{
-    align-items: center;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    padding-top: 20px;
-    padding-bottom: 20px;
-    width: 100%;
-}
 
 
 /*////////////////////////////////////////*/

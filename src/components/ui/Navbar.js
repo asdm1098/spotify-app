@@ -93,7 +93,7 @@ export const Navbar = () => {
                     href= "/"
                     style= {{ cursor: "pointer"}}
                 >
-                    <img src={logo} className="d-inline-block align-top card-img-logo" alt="home"/>
+                    <img style={{marginLeft:'20px'}} src={logo} className="d-inline-block align-top card-img-logo" alt="home"/>
                 </a>
             </nav>
 
@@ -111,7 +111,7 @@ export const Navbar = () => {
                     onClick= {handleClickArtists}
                     onChange= { handleInputChange }
                     style={{background: '#333333', border: 'none', color: 'gray',
-                            width: '20vw'
+                            width: '20vw', marginRight:'30px'
                     }}
                     
                 />
@@ -130,7 +130,7 @@ export const Navbar = () => {
                     onClick = { handleClickSongs }
                     onChange = { handleInputChange }
                     style={{background: '#333333', border: 'none', color: 'gray',
-                    width: '20vw',
+                    width: '20vw', marginRight: '90px',
                     }}
                 />
                 

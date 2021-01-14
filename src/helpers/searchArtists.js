@@ -5,11 +5,11 @@ export const searchArtists = async ( token, search ) => {
     
     
 
-    const {data} = await axios(`https://api.spotify.com/v1/search?q=${search}&type=artist&limit=6&offset=5`, {
+    const {data} = await axios(`https://api.spotify.com/v1/search?limit=12&type=artist&q=${search}`, {
        
         method: 'GET',
         headers: { 'Authorization' : 'Bearer ' + token },
-
+        json: true
         })/*.then ( ({data}) => {
             console.log('ESTA ES LA RESPUESTA: ');
             console.log( data );
