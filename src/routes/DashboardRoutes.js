@@ -9,12 +9,12 @@ import { SongsScreen } from '../components/spotify/Songs/SongsScreen'
 
 //import { SpotifyScreen } from '../components/spotify/SpotifyScreen'
 
-import { Navbar } from '../components/ui/Navbar'
+//import { Navbar } from '../components/ui/Navbar'
 
 export const DashboardRoutes = () => {
     return (
         <>  
-            <Navbar />
+            {/*<Navbar />*/}
                 <Switch>
                     
                     <Route path="/artists" component={ ArtistsScreen } />

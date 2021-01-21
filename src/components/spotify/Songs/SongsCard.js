@@ -4,9 +4,9 @@ export const SongsCard = ({
     idCategory,
     name,
     icon,
-    hrefCategory
+    //hrefCategory
 }) => {
-
+     
     return (
         
 

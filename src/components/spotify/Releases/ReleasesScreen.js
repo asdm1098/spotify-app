@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { useEffect } from 'react';
+//import { useEffect } from 'react';
 
-import { startLoadingReleases, startNextPage, startPreviousPage } from '../../../actions/releases';
+import { startNextPage, startPreviousPage } from '../../../actions/releases';
 import { ReleasesList } from './ReleasesList';
 
 
@@ -15,19 +15,8 @@ export const ReleasesScreen = () => {
     const { title } = useSelector(state => state.spotify);
     const { loading } = useSelector(state => state.ui);
     const { next, previous } = useSelector(state => state.releases);
-
-
-    useEffect(() => {
-        
-        if( token !=null ){
-
-            //console.log('ESTA ES LA PUTA RESPUESTA CORRECTA');
-            dispatch(startLoadingReleases(token) );
-        }else{
-            console.log('ALVVVVVVVVVVVVGA');
-        }
-
-    }, [token, dispatch])
+    //const { releases } = useSelector(state => state.releases);
+    //console.log(releases);
 
     const nextPage = () => {
         dispatch( startNextPage( token, next ) );
@@ -38,6 +27,8 @@ export const ReleasesScreen = () => {
 
         //console.log('atrasss');
     }
+
+    //console.log('LLAMADO COMPONENTE RELEASES');
 
     return (
         <div>
@@ -69,7 +60,7 @@ export const ReleasesScreen = () => {
                     ></i>
                 </button>
             </div>
-            <ReleasesList  />
+            <ReleasesList />
               
             </div>
         </div>

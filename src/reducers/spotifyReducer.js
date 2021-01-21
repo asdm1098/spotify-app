@@ -28,7 +28,7 @@ export const spotifyReducer = ( state = initialState, action) => {
         case types.releasesScreenActive:
             return {
                 ...state,
-                screen: action.payload,
+                screen: action.payload.screen,
                 title: action.payload.title
             }
     

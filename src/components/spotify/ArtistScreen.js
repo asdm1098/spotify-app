@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 
@@ -6,7 +6,7 @@ import { useParams } from 'react-router-dom';
 import TopCart from './Artists/ArtistInfo/TopCart';
 import AlbumCart from './Artists/ArtistInfo/AlbumCart';
 import RelatedPhoto from './Artists/ArtistInfo/RelatedPhoto';
-import { startActiveArtist, startAlbumsArtist, startRelatedArtists, startTopTracks } from '../../actions/artists';
+import { startActiveArtist, startAlbumsArtist, startNextPageAlbums, startPreviousPageAlbums, startRelatedArtists, startTopTracks } from '../../actions/artists';
 ////////////////////////
 
 export const ArtistScreen = () =>  {
@@ -14,6 +14,8 @@ export const ArtistScreen = () =>  {
     const dispatch = useDispatch();
     const { artistId } = useParams();
     const { token } = useSelector(state => state.auth);
+    const { loading } = useSelector(state => state.ui);
+
 
     useEffect(() => {
         //const artist = await getArtistById( artistId, token );
@@ -28,10 +30,9 @@ export const ArtistScreen = () =>  {
     }, [artistId, token, dispatch])
 
     
-    const { artist, relatedArtists, albums, topTracks} = useSelector(state => state.artists);
-    const [offset, setOffset] = useState(0);
+    const { artist, relatedArtists, albums, topTracks, next, previous} = useSelector(state => state.artists);
 
-
+    //console.log(albums);
     //console.log(relatedArtists);
 
     const {
@@ -44,22 +45,17 @@ export const ArtistScreen = () =>  {
 
     } = artist;
 
-    const offsetList = (id) => {
-        switch (id) {
-            case 'offPrev':
-                if (offset > 0) {
-                    setOffset(offset - 6);
-                }
-                break;
-            case 'offNext':
-                setOffset(offset + 6);
-                break;
 
-            default: 
-                return console.log('default');     
-        }
+    const nextPage = () => {
+        dispatch( startNextPageAlbums( token, next ) );
     }
 
+    const previousPage = () => {
+        dispatch( startPreviousPageAlbums( token, previous ) );
+
+        //console.log('atrasss');
+    }
+    
    
 
     return (
@@ -106,14 +102,28 @@ export const ArtistScreen = () =>  {
                     <div className="albums-control row">
                         <p>Albums</p>
                         <div className="release-control">
+                            <button 
+                                className="btn"
+                                disabled={ loading || !previous }
+                                style={{color:'white'}} 
+
+                                onClick={previousPage}
+                            >
                             <i
                                 id="offPrev"
-                                onClick={() => offsetList("offPrev")}
                                 className="fas fa-chevron-circle-left"></i>
+                            </button>
+
+                            <button 
+                                className="btn"
+                                disabled={ loading || !next }
+                                style={{color:'white'}} 
+                                onClick={nextPage}
+                            >
                             <i
                                 id="offNext"
-                                onClick={() => offsetList("offNext")}
                                 className="fas fa-chevron-circle-right"></i>
+                            </button>
                         </div>
                     </div>
 

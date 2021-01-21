@@ -1,4 +1,4 @@
-import React, { /*useState*/ } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {  useHistory, useLocation } from 'react-router-dom';
 
@@ -10,8 +10,9 @@ import { /*activeSongs,*/ startLoadingSongs, startScreen, startSearchSong } from
 //import { searchSongs } from '../../helpers/searchSongs';
 import { useForm } from '../../hooks/useForm';
 import  logo  from '../../styles/images/Spotify.png';
+import { activeReleases, startLoadingReleases } from '../../actions/releases';
 
-export const Navbar = () => {
+export const Navbar = React.memo(() => {
     
     const history = useHistory();
     const location = useLocation();
@@ -26,34 +27,42 @@ export const Navbar = () => {
     const { loading } = useSelector( state => state.ui);
     const { screen } = useSelector(state => state.spotify);
 
-     const [ formValues, handleInputChange ] = useForm( {
+    
+    const [ formValues, handleInputChange, reset ] = useForm( {
         searchArtist: q,
         searchSong: q2,
     } );
 
     const { searchArtist, searchSong } = formValues;
-    
+
+    useEffect(() => {
+        //console.log('ESTA ES LA PUTA RESPUESTA CORRECTA');
+        
+        dispatch(startLoadingReleases(token) );
+        
+    }, [token, dispatch]);
+
     const handleClickArtists = () => {
         if ( screen !== 'artists' && screen !== 'ActiveArtist' ){
             
             console.log('PRIMERA CARGA ARTISTAS CORRECTAMENTE');
             dispatch( startLoadingArtists( token ));
+            reset()
             history.push('/artists');
         }
     }
-     
     const handleSearchArtist = async(e) => {
         e.preventDefault();
-        
         if( screen === 'ActiveArtist' ) {
             await history.replace(`/artists`);
         }
-        if( searchArtist.trim().length > 2 ){
-            await history.push(`?q=${ searchArtist }`);
+        if( searchArtist.trim().length > 0 ){
             dispatch( startSearchArtist( token, searchArtist) );
+            await history.push(`?q=${ searchArtist }`);
             console.log('BUSQUEDA ARTISTA');
         }
     }
+     
 
     const handleClickSongs = () => {
         if ( screen !== 'songs' && screen !== 'searchSong' ){
@@ -61,6 +70,7 @@ export const Navbar = () => {
             console.log('PRIMERA CARGA CANCIONES');
             dispatch( startScreen() );
             dispatch( startLoadingSongs( token ));
+            reset()
             history.push('/songs');
 
         }
@@ -70,7 +80,7 @@ export const Navbar = () => {
         e.preventDefault();
         await history.push(`?q2=${ searchSong }`)
 
-        if( searchSong.trim().length > 2 ){
+        if( searchSong.trim().length > 0 ){
             dispatch( startSearchSong( token, searchSong) );
             console.log('BUSQUEDA CANCIÓN');
         }else {
@@ -82,25 +92,37 @@ export const Navbar = () => {
     /*const handleLogout = () => {
         dispatch( startLogout() );
     }*/
+    const handleClickIcon = async() => {
+        //dispatch(startLoadingReleases(token))
+        const pantalla = await screen;
+        if ( pantalla === 'releases'){
+            console.log('PANTALLA IGUAL');
+        }else{
+            history.push('/');
+            dispatch(activeReleases('releases', 'New releases'));
+            console.log('Click logo');
+        }
+        
+    }
 
-    
+    //console.log('LLAMADO A NAVBAR');
     
     return (
 
         <div className="navbar navbar-dark navbar-gray">
+            
             <nav className="navbar-content row">
-                <a  className="navbar-brand"
-                    href= "/"
+                <div  className="navbar-brand"
                     style= {{ cursor: "pointer"}}
+                    onClick={ handleClickIcon}
                 >
                     <img style={{marginLeft:'20px'}} src={logo} className="d-inline-block align-top card-img-logo" alt="home"/>
-                </a>
+                </div>
             </nav>
 
-            <form onSubmit={ handleSearchArtist } className="form-inline my-2 my-lg-0" >
-            {/*<i className="fas fa-search"></i>*/}
-                
-                <input 
+            <form onSubmit ={ handleSearchArtist } className="form-inline my-2 my-lg-0" >
+
+             <input 
                     type="text"
                     className="form-control fas"
                     placeholder= "&#xf002; Find artist"
@@ -116,6 +138,9 @@ export const Navbar = () => {
                     
                 />
             </form>
+                
+               
+            
            
             <form onSubmit={ handleSearchSong } className="form-inline my-2 my-lg-0" >
                 
@@ -149,4 +174,4 @@ export const Navbar = () => {
         
         
     )
-}
+})

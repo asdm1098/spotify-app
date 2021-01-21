@@ -74,6 +74,10 @@ export const albumsOptions = async ( artistId, token ) => {
 
         })
 
+
+        const next = data?.next;
+        const previous = data?.previous;
+
         const {items} = data;
         const albums = [];
         
@@ -87,15 +91,50 @@ export const albumsOptions = async ( artistId, token ) => {
                 images: data.images,
     
             })
-        })
+        });
 
 
     //console.log('::ALBUMS OPTIONS:::');
     //console.log(albums);
     
-    return albums;
+    return {
+        albums, next, previous
+    };
 
 }
+
+export const loadAlbumsPage = async ( token, api ) => {
+    const {data} = await axios(`${api}`, {
+       
+        method: 'GET',
+        headers: { 'Authorization' : 'Bearer ' + token },
+
+        });
+
+        const next = data?.next;
+        const previous = data?.previous;
+
+        const {items} = data;
+        const albums = [];
+        
+        items.forEach( data => {
+
+            albums.push({
+                        
+                idAlbum: data.id,
+                name: data.name,
+                release_date: data.release_date,
+                images: data.images,
+    
+            })
+        });
+    
+    return {
+        albums, next, previous
+    };
+}
+
+
 
 export const topTracksOptions = async ( artistId, token ) => {
     

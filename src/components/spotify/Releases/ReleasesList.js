@@ -3,10 +3,10 @@ import { useSelector } from 'react-redux';
 import { ReleasesCard } from './ReleasesCard';
 
 
-export const ReleasesList = () => {
+export const ReleasesList = React.memo(() => {
 
     const {releases} = useSelector(state => state.releases);
-
+    //console.log('Llamado a releasesList');
     return (
       <div className="card-columns animate__animated animate__fadeIn">
           {
@@ -19,4 +19,4 @@ export const ReleasesList = () => {
           }
       </div>
     )
-}
+})

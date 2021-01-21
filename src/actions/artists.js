@@ -1,7 +1,7 @@
 
 import { loadArtists } from "../helpers/loadArtists";
 import { searchArtists } from "../helpers/searchArtists";
-import { albumsOptions, getArtistById, relatedOptions, topTracksOptions } from "../selectors/getArtistById";
+import { albumsOptions, getArtistById, loadAlbumsPage, relatedOptions, topTracksOptions } from "../selectors/getArtistById";
 import { types } from "../types/types";
 import { startLogout } from "./auth";
 import { finishLoading, startLoading } from "./ui";
@@ -106,6 +106,34 @@ export const startAlbumsArtist = ( artistId, token ) => {
     return async ( dispatch ) => {
         const albums = await albumsOptions( artistId, token)
         dispatch( setAlbums(albums))
+    }
+}
+
+export const startNextPageAlbums = ( token, next ) => {
+    return async ( dispatch ) => {
+        try {
+            dispatch( startLoading());
+            const albums = await loadAlbumsPage( token, next );
+            dispatch( setAlbums(albums) );
+            dispatch( finishLoading() );
+        } catch (error) {
+            console.log(error);
+            dispatch( startLogout());
+        }
+    }
+}
+
+export const startPreviousPageAlbums = ( token, previous ) => {
+    return async ( dispatch ) => {
+        try {
+            dispatch( startLoading());
+            const albums = await loadAlbumsPage( token, previous );
+            dispatch( setAlbums(albums) );
+            dispatch( finishLoading() );
+        } catch (error) {
+            console.log(error);
+            dispatch( startLogout());
+        }
     }
 }
 

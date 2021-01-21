@@ -7,6 +7,8 @@ const initState = {
     relatedArtists: [],
     albums: [],
     topTracks: [],
+    next: null,
+    previous: null,
 
 }
 
@@ -40,7 +42,9 @@ export const artistsReducer = ( state = initState, action ) => {
         case types.albums: {
             return {
                 ...state,
-                albums: [ ...action.payload ]
+                albums: [ ...action.payload.albums ],
+                next: action.payload.next,
+                previous: action.payload.previous
             }
         }
 

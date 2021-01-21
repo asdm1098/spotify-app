@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 //import { Link } from 'react-router-dom'
 
 export const ReleasesCard = ({
@@ -20,9 +21,11 @@ export const ReleasesCard = ({
                 <h6 className="overflow-string card-title text-truncate mb-1"
                     style={{color: 'white'}}
                 >{ name }</h6>
-                <p className="card-text text-truncate"
-                    style={{color: 'gray'}}
-                >{ nameArtist }</p>
+                <Link to={`./artist/${idArtist}`} className="text-artist"> 
+                    <p className="card-text text-truncate"
+                        style={{color: 'gray'}}
+                    >{ nameArtist }</p>
+                </Link>
             </div>
         </div>
 

@@ -3,8 +3,6 @@ import axios from 'axios';
 
 export const loadReleasesNext = async ( token, api ) => {
     
-    
-
     const {data} = await axios(`${api}`, {
 
         method: 'GET',

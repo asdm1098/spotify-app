@@ -24,6 +24,13 @@ input, textarea {
 
 
 /*PRUEBA PARRAFOS*/
+.text-artist {
+    text-decoration: none !important;
+    
+}
+.text-artist :hover {
+    color: #1DB954 !important;
+}
 
 
 /*///*/

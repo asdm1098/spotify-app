@@ -12,12 +12,11 @@ import { DashboardRoutes } from './DashboardRoutes';
 import { PrivateRoute } from './PrivateRoute';
 import { PublicRoute } from './PublicRoute';
 import { loginSpotify, startSpotifyLogin } from '../actions/auth';
+import { Navbar } from '../components/ui/Navbar';
 
 export const AppRouter = () => {
     
     const dispatch = useDispatch();
-
-    
 
     const [ cheking, setCheking ] = useState(true);
     const [ isLoggedIn, setIsLoggedIn ] = useState(false);
@@ -26,7 +25,7 @@ export const AppRouter = () => {
     useEffect(() => {
         const token = localStorage.getItem('token');
        
-        if(  token != null ) {
+        if( token ) {
             console.log('SI HAY TOKEN ');
     
             dispatch( loginSpotify(token));
@@ -54,9 +53,11 @@ export const AppRouter = () => {
 
     return (
         <Router>    
-            <div>           
+        <Navbar />
+            <div>  
+                 
                 <Switch>
-                    <PublicRoute path="/auth" isAuthenticated = { isLoggedIn } component= { AuthRouter } /> 
+                    <PublicRoute path="/auth" isAuthenticated = { isLoggedIn } component= { AuthRouter } />
                     
                     <PrivateRoute path="/" isAuthenticated = { isLoggedIn } component= { DashboardRoutes } />
 

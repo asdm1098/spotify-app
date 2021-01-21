@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { startLoadingSongs } from '../../../actions/songs';
+import { activeSongs, startLoadingSongs } from '../../../actions/songs';
 import { SongsList } from './SongsList';
 
 
@@ -13,8 +13,9 @@ export const SongsScreen = () => {
         if( token !== null ){
             //console.log('ESTA ES LA RESPUESTA CORRECTA');
             dispatch(startLoadingSongs(token) );
+            dispatch( activeSongs('songs', 'Songs'))
         }else{
-            console.log('ALVVVVVVVVVVVVGA');
+            console.log('Error token');
         }
 
     }, [token, dispatch])

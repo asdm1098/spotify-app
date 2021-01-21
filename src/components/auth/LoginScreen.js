@@ -4,7 +4,9 @@ import React from 'react';
 export const LoginScreen = () => {
 
     return (
+        <>
         <div style={{backgroundColor:'black', color: 'white'}}><p>Loading...</p></div>
+        </>
     )
 }
 
