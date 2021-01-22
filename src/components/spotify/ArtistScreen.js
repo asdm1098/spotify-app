@@ -31,7 +31,7 @@ export const ArtistScreen = () =>  {
 
     
     const { artist, relatedArtists, albums, topTracks, next, previous} = useSelector(state => state.artists);
-
+    //console.log(topTracks);
     //console.log(albums);
     //console.log(relatedArtists);
 

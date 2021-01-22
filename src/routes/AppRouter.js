@@ -37,7 +37,7 @@ export const AppRouter = () => {
         }
     
         setCheking( false );
-        console.log('::TOKEN:: ', token);
+        //console.log('::TOKEN:: ', token);
     }, [dispatch])
     
 

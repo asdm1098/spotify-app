@@ -146,6 +146,7 @@ export const topTracksOptions = async ( artistId, token ) => {
         })
 
         const { tracks } = data;
+        //console.log(tracks);
         //console.log(data);
         const trackss = [];
         
@@ -158,6 +159,7 @@ export const topTracksOptions = async ( artistId, token ) => {
                 album: data.album.name,
                 duration_ms: data.duration_ms,
                 images: data.album.images,
+                preview: data?.preview_url
     
             })
         })

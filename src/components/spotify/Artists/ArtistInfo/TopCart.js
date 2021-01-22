@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from 'react'
+import ReactTooltip from 'react-tooltip';
 
 export default function TopCart({
     idTrack,
@@ -6,7 +7,8 @@ export default function TopCart({
     album,
     duration_ms,
     images,
-    position
+    position,
+    preview
 }) {
 
     const [duration, setDuration] = useState('');
@@ -31,10 +33,11 @@ export default function TopCart({
     }
     // Lyfe Cicle used to run getDuration function, getting the track duration into
     // mm:ss format
+
     useEffect(() => {
         getDuration(parseInt(duration_ms))
     }, [duration_ms])
-
+    
     return (
         <div className="top-cart row">
             <p className="top-position">{position}</p>
@@ -43,10 +46,28 @@ export default function TopCart({
                 style={{
                 backgroundImage: 'url(' + images[0].url + ')'
             }}></div>
-            <div className="top-song-info column">
-                <div className="top-title">{name}</div>
-                <div className="top-album">{album}</div>
-            </div>
+
+                <div className="top-song-info column" >
+                    <button data-tip data-for="tooltip" className="btn-song" >
+                        <a href={preview} target="_blank" rel="noreferrer" style={{textDecoration:'none'}}>
+                            <div className="top-title">{name}</div>
+                            <div className="top-album">{album}</div>
+                        </a>
+
+                    </button>
+            
+                    <ReactTooltip id="tooltip"
+                        place="right"
+                        type="light"
+                        className="tooltip"
+                    >
+                        {
+                            (preview) ? (<div>Click to Preview!</div>) : (<div>No preview :C</div>  )
+                        }
+                        
+                    </ReactTooltip>
+   
+                </div>
             <div className="top-duration">
                 <p>{duration}
                 </p>

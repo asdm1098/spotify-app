@@ -22,7 +22,15 @@ input, textarea {
     text-decoration: inherit;
 }
 
+.btn-song {
+    background-color: #181818 !important;
+    border: none !important;
+    text-align: left !important;
+}
 
+.tooltip{
+    background-color: #1DB954 !important;
+}
 /*PRUEBA PARRAFOS*/
 .text-artist {
     text-decoration: none !important;

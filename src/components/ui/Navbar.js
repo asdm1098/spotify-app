@@ -12,7 +12,7 @@ import { useForm } from '../../hooks/useForm';
 import  logo  from '../../styles/images/Spotify.png';
 import { activeReleases, startLoadingReleases } from '../../actions/releases';
 
-export const Navbar = React.memo(() => {
+export const Navbar = () => {
     
     const history = useHistory();
     const location = useLocation();
@@ -37,7 +37,6 @@ export const Navbar = React.memo(() => {
 
     useEffect(() => {
         //console.log('ESTA ES LA PUTA RESPUESTA CORRECTA');
-        
         dispatch(startLoadingReleases(token) );
         
     }, [token, dispatch]);
@@ -53,13 +52,15 @@ export const Navbar = React.memo(() => {
     }
     const handleSearchArtist = async(e) => {
         e.preventDefault();
+        //console.log(searchArtist);
+
         if( screen === 'ActiveArtist' ) {
             await history.replace(`/artists`);
         }
         if( searchArtist.trim().length > 0 ){
-            dispatch( startSearchArtist( token, searchArtist) );
             await history.push(`?q=${ searchArtist }`);
-            console.log('BUSQUEDA ARTISTA');
+            dispatch( startSearchArtist( token, searchArtist) );
+            //console.log('BUSQUEDA ARTISTA!!!!');
         }
     }
      
@@ -67,7 +68,7 @@ export const Navbar = React.memo(() => {
     const handleClickSongs = () => {
         if ( screen !== 'songs' && screen !== 'searchSong' ){
             
-            console.log('PRIMERA CARGA CANCIONES');
+            //console.log('PRIMERA CARGA CANCIONES');
             dispatch( startScreen() );
             dispatch( startLoadingSongs( token ));
             reset()
@@ -82,10 +83,10 @@ export const Navbar = React.memo(() => {
 
         if( searchSong.trim().length > 0 ){
             dispatch( startSearchSong( token, searchSong) );
-            console.log('BUSQUEDA CANCIÓN');
+            //console.log('BUSQUEDA CANCIÓN');
         }else {
             dispatch( startScreen() );
-            console.log('AL INICIO DEL SCREEN SONG');
+            //console.log('AL INICIO DEL SCREEN SONG');
         }
     }
 
@@ -96,11 +97,11 @@ export const Navbar = React.memo(() => {
         //dispatch(startLoadingReleases(token))
         const pantalla = await screen;
         if ( pantalla === 'releases'){
-            console.log('PANTALLA IGUAL');
+            //console.log('PANTALLA IGUAL');
         }else{
             history.push('/');
             dispatch(activeReleases('releases', 'New releases'));
-            console.log('Click logo');
+            //console.log('Click logo');
         }
         
     }
@@ -174,4 +175,4 @@ export const Navbar = React.memo(() => {
         
         
     )
-})
+}
